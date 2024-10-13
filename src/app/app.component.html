@@ -1,0 +1,53 @@
+<!-- Search Input Section -->
+<h1 style="font-size: 40px; text-align: center;">GDGoC-UB Weather App</h1>
+<div class="mt-10 w-full lg:w-auto flex justify-center">
+    <input 
+      type="text" 
+      placeholder="Enter location..." 
+      class="border rounded-l-lg p-2" [(ngModel)]="location" (keydown.enter)="fetchWeatherData()"
+    />
+    <button 
+      class="bg-blue-500 text-white rounded-r-lg p-2" (click)="fetchWeatherData()"
+    >
+      Search
+    </button>
+</div>
+
+
+<!-- component -->
+<div class="w-full mt-16 lg:mt-64 lg:px-40 justify-center container mx-auto">
+    
+  <div class="flex flex-wrap w-full lg:w-auto">
+      <div class="w-full lg:w-1/2 flex rounded-lg bg-auto" style="background-image: url('https://images.unsplash.com/photo-1559963110-71b394e7494d?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=675&q=80')">
+          <div class="rounded-lg py-6 pl-8 pr-32 w-full bg-blue-400 opacity-90 text-white">
+              <div class="mb-20">
+                  <h2 class="font-bold text-3xl leading-none pb-1">{{weatherDetails.location.name}}, {{weatherDetails.location.country}}</h2>
+                  <h3 class="leading-none pb-2 pl-1">{{weatherDetails.location.localtime | dateFormat}}</h3>
+                 
+              </div>
+              <div>
+                <img [src]="weatherDetails.current.condition.icon" alt="Weather icon" class="w-16 mb-2">
+                <strong class="leading-none text-6xl block font-weight-bolder">{{weatherDetails.current.temp_c}}°C</strong>
+                <h3>Feels like {{weatherDetails.current.feelslike_c}}°C</h3>
+                <b class="text-2xl block font-bold">{{weatherDetails.current.condition.text}}</b>
+            </div>
+            
+          </div>
+      </div>
+
+      <div class="w-full lg:w-1/2 flex ml-0">
+          <div class="lg:my-3 bg-gray-800 text-white p-8 lg:rounded-r-lg w-full">
+              <div class="flex justify-between w-64 mb-4 w-full">
+                  <div class="w-auto font-bold uppercase text-90">Precipitation</div><div class="w-auto text-right">{{weatherDetails.current.precip_mm}}%</div>
+              </div>
+              <div class="flex justify-between w-64 mb-4 w-full">
+                  <div class="w-auto font-bold uppercase text-90">Humidity</div><div class="w-auto text-right">{{weatherDetails.current.humidity}}%</div>
+              </div>
+              <div class="flex justify-between w-64 mb-8 w-full">
+                  <div class="w-auto font-bold uppercase text-90">Wind</div><div class="w-auto text-right">{{weatherDetails.current.wind_kph}}kph</div>
+              </div>
+  
+          </div>
+      </div>
+  </div>
+</div>
